@@ -30,12 +30,11 @@ fn main() {
         .collect::<Vec<JsonValue>>();
 
     for ws in &mut workspace_json_vec {
-
-        println!("Ws {}: Name {}", ws.remove("num"), ws.remove("name"));
-        println!("Visible: {}, Focused: {}", ws.remove("visible"), ws.remove("focused"));
-        println!("---");
+        if ws.remove("focused").as_bool().unwrap() {
+            print!( r"<txt><span fgcolor='Red'> {} </span></txt>", ws.remove("name") );
+        } else {
+            print!( r"<txt><span fgcolor='Green'> {} </span></txt>", ws.remove("name") );
+        }
     }
-
-    println!();
 
 }
