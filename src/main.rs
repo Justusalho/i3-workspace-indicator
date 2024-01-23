@@ -29,12 +29,18 @@ fn main() {
         .map(|ws| ws.take())
         .collect::<Vec<JsonValue>>();
 
+    print!("<txt> ");
+
     for ws in &mut workspace_json_vec {
         if ws.remove("focused").as_bool().unwrap() {
-            print!( r"<txt><span fgcolor='Red'> {} </span></txt>", ws.remove("name") );
+            print!( "<span fgcolor='#b4b'><b> {} </b></span>", ws.remove("name") );
+        } else if ws.remove("visible").as_bool().unwrap() {
+            print!( r"<span fgcolor='#eee'> {} </span>", ws.remove("name") );
         } else {
-            print!( r"<txt><span fgcolor='Green'> {} </span></txt>", ws.remove("name") );
+            print!( r"<span fgcolor='#999'> {} </span>", ws.remove("name") );
         }
     }
+
+    println!(" </txt>");
 
 }
